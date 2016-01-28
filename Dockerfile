@@ -30,7 +30,7 @@ RUN mkdir -p $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
     && rm -rf $TREEFROGFRAMEWORK_PREFIX_SRC_DIR
 
 RUN echo $TREEFROGFRAMEWORK_PREFIX/lib > /etc/ld.so.conf.d/treefrogframework.conf && ldconfig
-ENV PATH $TREEFROGFRAMEWORK_PREFIX/bin:/usr/lib64/qt4/bin:$PATH
+ENV PATH $TREEFROGFRAMEWORK_PREFIX/bin:/usr/lib64/qt5/bin:$PATH
 
 WORKDIR /srv/
 CMD ["tspawn", "-h"]
