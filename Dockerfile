@@ -17,6 +17,7 @@ RUN yum update -y && yum install -y \
     which \
     && yum clean all
 
+ENV PATH /usr/lib64/qt5/bin:$PATH
 RUN mkdir -p $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
     && curl -sL $TREEFROGFRAMEWORK_ARCHIVE_URL | tar xz -C $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
     && cd $TREEFROGFRAMEWORK_BASE_DIR \
@@ -30,7 +31,7 @@ RUN mkdir -p $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
     && rm -rf $TREEFROGFRAMEWORK_PREFIX_SRC_DIR
 
 RUN echo $TREEFROGFRAMEWORK_PREFIX/lib > /etc/ld.so.conf.d/treefrogframework.conf && ldconfig
-ENV PATH $TREEFROGFRAMEWORK_PREFIX/bin:/usr/lib64/qt5/bin:$PATH
+ENV PATH $TREEFROGFRAMEWORK_PREFIX/bin:$PATH
 
 WORKDIR /srv/
 CMD ["tspawn", "-h"]
