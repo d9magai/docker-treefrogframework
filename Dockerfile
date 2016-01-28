@@ -7,12 +7,13 @@ ENV TREEFROGFRAMEWORK_VERSION 1.10.0
 ENV TREEFROGFRAMEWORK_BASE_DIR $TREEFROGFRAMEWORK_PREFIX_SRC_DIR/treefrog-framework-$TREEFROGFRAMEWORK_VERSION
 ENV TREEFROGFRAMEWORK_ARCHIVE_URL https://github.com/treefrogframework/treefrog-framework/archive/v$TREEFROGFRAMEWORK_VERSION.tar.gz
 
+RUN yum update -y && yum install -y epel-release && yum clean all
 RUN yum update -y && yum install -y \
     gcc-c++ \
     make \
     gdb \
-    qt-devel \
-    qt-mysql \
+    qt5-qtbase-devel \
+    qt5-qtbase-mysql \
     which \
     && yum clean all
 
