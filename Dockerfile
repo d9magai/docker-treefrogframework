@@ -33,6 +33,7 @@ RUN mkdir -p $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
 RUN echo $TREEFROGFRAMEWORK_PREFIX/lib > /etc/ld.so.conf.d/treefrogframework.conf && ldconfig
 ENV PATH $TREEFROGFRAMEWORK_PREFIX/bin:$PATH
 
+EXPOSE 8800
 WORKDIR /srv/
 CMD ["tspawn", "-h"]
 
