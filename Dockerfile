@@ -26,11 +26,11 @@ RUN mkdir -p $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
     && cd $TREEFROGFRAMEWORK_BASE_DIR \
     && ./configure --prefix=$TREEFROGFRAMEWORK_PREFIX \
     && cd $TREEFROGFRAMEWORK_BASE_DIR/src \
-    && make \
-    && make install \
+    && make -s \
+    && make -s install \
     && cd $TREEFROGFRAMEWORK_BASE_DIR/tools \
-    && make \
-    && make install \
+    && make -s \
+    && make -s install \
     && rm -rf $TREEFROGFRAMEWORK_PREFIX_SRC_DIR
 
 RUN echo $TREEFROGFRAMEWORK_PREFIX/lib > /etc/ld.so.conf.d/treefrogframework.conf && ldconfig
