@@ -7,9 +7,12 @@ ENV TREEFROGFRAMEWORK_VERSION 1.10.0
 ENV TREEFROGFRAMEWORK_BASE_DIR $TREEFROGFRAMEWORK_PREFIX_SRC_DIR/treefrog-framework-$TREEFROGFRAMEWORK_VERSION
 ENV TREEFROGFRAMEWORK_ARCHIVE_URL https://github.com/treefrogframework/treefrog-framework/archive/v$TREEFROGFRAMEWORK_VERSION.tar.gz
 
-RUN yum update -y && yum install -y epel-release && yum clean all
 RUN yum update -y && yum install -y \
-    gcc-c++ \
+    epel-release \
+    centos-release-scl \
+    && yum clean all
+RUN yum update -y && yum install -y \
+    devtoolset-3-gcc-c++ \
     make \
     gdb \
     qt5-qtbase-devel \
@@ -17,7 +20,7 @@ RUN yum update -y && yum install -y \
     which \
     && yum clean all
 
-ENV PATH /usr/lib64/qt5/bin:$PATH
+ENV PATH /opt/rh/devtoolset-3/root/bin/:/usr/lib64/qt5/bin:$PATH
 RUN mkdir -p $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
     && curl -sL $TREEFROGFRAMEWORK_ARCHIVE_URL | tar xz -C $TREEFROGFRAMEWORK_PREFIX_SRC_DIR \
     && cd $TREEFROGFRAMEWORK_BASE_DIR \
