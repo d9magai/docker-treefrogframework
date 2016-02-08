@@ -2,10 +2,10 @@ FROM centos
 MAINTAINER d9magai
 
 ENV TREEFROGFRAMEWORK_PREFIX /opt/treefrogframework
-ENV TREEFROGFRAMEWORK_SRC_DIR $TREEFROGFRAMEWORK_PREFIX/src
+ENV TREEFROGFRAMEWORK_SRC_DIR ${TREEFROGFRAMEWORK_PREFIX}/src
 ENV TREEFROGFRAMEWORK_VERSION 1.10.0
-ENV TREEFROGFRAMEWORK_BASE_DIR $TREEFROGFRAMEWORK_SRC_DIR/treefrog-framework-$TREEFROGFRAMEWORK_VERSION
-ENV TREEFROGFRAMEWORK_ARCHIVE_URL https://github.com/treefrogframework/treefrog-framework/archive/v$TREEFROGFRAMEWORK_VERSION.tar.gz
+ENV TREEFROGFRAMEWORK_BASE_DIR ${TREEFROGFRAMEWORK_SRC_DIR}/treefrog-framework-${TREEFROGFRAMEWORK_VERSION}
+ENV TREEFROGFRAMEWORK_ARCHIVE_URL https://github.com/treefrogframework/treefrog-framework/archive/v${TREEFROGFRAMEWORK_VERSION}.tar.gz
 
 RUN yum update -y && yum install -y \
     epel-release \
@@ -20,21 +20,21 @@ RUN yum update -y && yum install -y \
     which \
     && yum clean all
 
-ENV PATH /opt/rh/devtoolset-3/root/bin/:/usr/lib64/qt5/bin:$PATH
-RUN mkdir -p $TREEFROGFRAMEWORK_SRC_DIR \
-    && curl -sL $TREEFROGFRAMEWORK_ARCHIVE_URL | tar xz -C $TREEFROGFRAMEWORK_SRC_DIR \
-    && cd $TREEFROGFRAMEWORK_BASE_DIR \
-    && ./configure --prefix=$TREEFROGFRAMEWORK_PREFIX \
-    && cd $TREEFROGFRAMEWORK_BASE_DIR/src \
+ENV PATH /opt/rh/devtoolset-3/root/bin/:/usr/lib64/qt5/bin:${PATH}
+RUN mkdir -p ${TREEFROGFRAMEWORK_SRC_DIR} \
+    && curl -sL ${TREEFROGFRAMEWORK_ARCHIVE_URL} | tar xz -C ${TREEFROGFRAMEWORK_SRC_DIR} \
+    && cd ${TREEFROGFRAMEWORK_BASE_DIR} \
+    && ./configure --prefix=${TREEFROGFRAMEWORK_PREFIX} \
+    && cd ${TREEFROGFRAMEWORK_BASE_DIR}/src \
     && make -s \
     && make -s install \
-    && cd $TREEFROGFRAMEWORK_BASE_DIR/tools \
+    && cd ${TREEFROGFRAMEWORK_BASE_DIR}/tools \
     && make -s \
     && make -s install \
-    && rm -rf $TREEFROGFRAMEWORK_SRC_DIR
+    && rm -rf ${TREEFROGFRAMEWORK_SRC_DIR}
 
-RUN echo $TREEFROGFRAMEWORK_PREFIX/lib > /etc/ld.so.conf.d/treefrogframework.conf && ldconfig
-ENV PATH $TREEFROGFRAMEWORK_PREFIX/bin:$PATH
+RUN echo ${TREEFROGFRAMEWORK_PREFIX}/lib > /etc/ld.so.conf.d/treefrogframework.conf && ldconfig
+ENV PATH ${TREEFROGFRAMEWORK_PREFIX}/bin:${PATH}
 
 EXPOSE 8800
 WORKDIR /srv/
