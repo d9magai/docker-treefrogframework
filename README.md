@@ -19,7 +19,7 @@ Query OK, 1 row affected (0.01 sec)
 mysql> USE blogdb;
 Database changed
 
-mysql> CREATE TABLE blog (id INTEGER AUTO_INCREMENT PRIMARY KEY, title VARCHAR(20), body VARCHAR(200), created_at TIMESTAMP DEFAULT 0, updated_at TIMESTAMP DEFAULT 0, lock_revision INTEGER) DEFAULT CHARSET=utf8;
+mysql> CREATE TABLE blog (id INTEGER AUTO_INCREMENT PRIMARY KEY, title VARCHAR(20), body VARCHAR(200), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, lock_revision INTEGER) DEFAULT CHARSET=utf8;
 mysql> quit
 ```
 
