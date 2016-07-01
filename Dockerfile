@@ -17,6 +17,7 @@ RUN yum update -y && yum install -y \
     gdb \
     qt5-qtbase-devel \
     qt5-qtbase-mysql \
+    qt5-qtdeclarative-devel \
     which \
     && yum clean all
 
